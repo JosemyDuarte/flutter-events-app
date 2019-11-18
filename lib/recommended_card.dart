@@ -12,7 +12,7 @@ class RecommendedCard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        TitleText(),
+        TitleText("Recommended"),
         SizedBox(
           height: 200.0,
           child: PageView.builder(

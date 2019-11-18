@@ -7,7 +7,7 @@ class TrendingList extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        TitleText(),
+        TitleText("Trending"),
         new Flexible(
           child: new Container(
             height: 200,
@@ -39,7 +39,7 @@ class HorizontalEventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 10, right: 10, bottom: 20.0),
+      padding: EdgeInsets.only(bottom: 20.0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.black,
