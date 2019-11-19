@@ -5,16 +5,16 @@ import 'title_text.dart';
 class RecommendedCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(child: _buildCarousel());
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Container(child: _buildCarousel(screenHeight));
   }
 
-  Widget _buildCarousel() {
+  Widget _buildCarousel(double screenHeight) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         TitleText("Recommended"),
-        SizedBox(
-          height: 200.0,
+        Expanded(
           child: ListView.builder(
             physics: ClampingScrollPhysics(),
             shrinkWrap: true,

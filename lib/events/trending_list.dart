@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/title_text.dart';
+
+import 'title_text.dart';
 
 class TrendingList extends StatelessWidget {
   final double _height;

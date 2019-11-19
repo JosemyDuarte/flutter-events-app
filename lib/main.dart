@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/nested_tab_bar.dart';
-import 'package:luxury_bag_collection/trending_list.dart';
+import 'package:luxury_bag_collection/events/nested_tab_bar.dart';
 
-import 'title_text.dart';
+import 'events/trending_list.dart';
 
 void main() => runApp(MyApp());
 
@@ -88,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _buildTopText(),
               _searchBar(),
               NestedTabBar(),
-              TrendingList(screenHeight * 0.34)
+              TrendingList(screenHeight * 0.25)
               //TrendingList(),
             ],
           ),
