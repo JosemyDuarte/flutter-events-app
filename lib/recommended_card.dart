@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'title_text.dart';
 
-class RecommendedCard extends StatelessWidget {
+class RecommendedCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(child: _buildCarousel());
@@ -15,12 +15,14 @@ class RecommendedCard extends StatelessWidget {
         TitleText("Recommended"),
         SizedBox(
           height: 200.0,
-          child: PageView.builder(
-            // store this controller in a State to save the carousel scroll position
-            controller: PageController(viewportFraction: 0.4),
-            itemBuilder: (BuildContext context, int itemIndex) {
-              return _buildCarouselItem(context, itemIndex);
-            },
+          child: ListView.builder(
+            physics: ClampingScrollPhysics(),
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: 15,
+            itemBuilder: (BuildContext context, int index) => Card(
+              child: Center(child: _buildCarouselItem(context, index)),
+            ),
           ),
         )
       ],
@@ -28,13 +30,11 @@ class RecommendedCard extends StatelessWidget {
   }
 
   Widget _buildCarouselItem(BuildContext context, int itemIndex) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+    return Container(
+      width: 140,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(8.0),
       ),
     );
   }

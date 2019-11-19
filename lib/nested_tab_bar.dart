@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/event_tab.dart';
-import 'package:luxury_bag_collection/trending_list.dart';
+
+import 'recommended_card.dart';
 
 class NestedTabBar extends StatefulWidget {
   @override
@@ -27,72 +27,80 @@ class _NestedTabBarState extends State<NestedTabBar>
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    return Container(
-      margin: EdgeInsets.only(left: 10.0, right: 10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          TabBar(
-            controller: _nestedTabController,
-            indicatorColor: Colors.teal,
-            labelColor: Colors.teal,
-            unselectedLabelColor: Colors.black54,
-            isScrollable: true,
-            tabs: <Widget>[
-              Tab(
-                text: "One",
-              ),
-              Tab(
-                text: "Two",
-              ),
-              Tab(
-                text: "Three",
-              ),
-              Tab(
-                text: "Four",
-              ),
-              Tab(
-                text: "Five",
-              ),
-            ],
-          ),
-          Container(
-            height: screenHeight * 0.32,
-            child: TabBarView(
-              controller: _nestedTabController,
-              children: <Widget>[
-                EventTab(),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.orangeAccent,
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.greenAccent,
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.indigoAccent,
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.redAccent,
-                  ),
-                ),
-              ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        TabBar(
+          controller: _nestedTabController,
+          indicatorColor: Colors.teal,
+          labelColor: Colors.teal,
+          unselectedLabelColor: Colors.black54,
+          isScrollable: true,
+          tabs: <Widget>[
+            Tab(
+              text: "One",
             ),
-          ),
-          TrendingList()
-        ],
-      ),
+            Tab(
+              text: "Two",
+            ),
+            Tab(
+              text: "Three",
+            ),
+            Tab(
+              text: "Four",
+            ),
+            Tab(
+              text: "Five",
+            ),
+          ],
+        ),
+        ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Container(
+                    height: screenHeight * 0.32,
+                    child: TabBarView(
+                      controller: _nestedTabController,
+                      children: <Widget>[
+                        RecommendedCarousel(),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Colors.orangeAccent,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Colors.greenAccent,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Colors.indigoAccent,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ]),
+      ],
     );
   }
 }
