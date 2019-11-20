@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _buildTopText(),
               _searchBar(),
               NestedTabBar(),
-              TrendingList(screenHeight * 0.25)
+              TrendingList(screenHeight * 0.18)
               //TrendingList(),
             ],
           ),
