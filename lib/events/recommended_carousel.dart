@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:luxury_bag_collection/model/recommended_event.dart';
 
 import 'title_text.dart';
 
 class RecommendedCarousel extends StatelessWidget {
+  final List<RecommendedEventModel> _recommendedEvents;
+
+  RecommendedCarousel(this._recommendedEvents);
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -14,13 +19,17 @@ class RecommendedCarousel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         TitleText("Recommended"),
-        Carousel(),
+        Carousel(_recommendedEvents),
       ],
     );
   }
 }
 
 class Carousel extends StatelessWidget {
+  final List<RecommendedEventModel> _recommendedEvents;
+
+  Carousel(this._recommendedEvents);
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -28,10 +37,10 @@ class Carousel extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: 15,
+        itemCount: _recommendedEvents.length,
         itemBuilder: (BuildContext context, int index) => Card(
           elevation: 0,
-          child: Center(child: CarouselItem()),
+          child: Center(child: CarouselItem(_recommendedEvents[index])),
         ),
       ),
     );
@@ -39,6 +48,10 @@ class Carousel extends StatelessWidget {
 }
 
 class CarouselItem extends StatelessWidget {
+  final RecommendedEventModel _recommendedEvent;
+
+  CarouselItem(this._recommendedEvent);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,19 +65,22 @@ class CarouselItem extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.grey,
                 image: DecorationImage(
-                  image: ExactAssetImage("assets/images/sonic.png"),
+                  image: ExactAssetImage(_recommendedEvent.imagePath),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
           ),
-          Text("Sonic"),
+          Text(_recommendedEvent.tittle),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[Icon(Icons.star), Text("94%")],
+            children: <Widget>[
+              Icon(Icons.star),
+              Text('${_recommendedEvent.rating}%')
+            ],
           )
         ],
       ),

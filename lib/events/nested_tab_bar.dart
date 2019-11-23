@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luxury_bag_collection/model/recommended_event.dart';
 
 import 'recommended_carousel.dart';
 
@@ -61,7 +62,7 @@ class _NestedTabBarState extends State<NestedTabBar>
           child: TabBarView(
             controller: _nestedTabController,
             children: <Widget>[
-              RecommendedCarousel(),
+              RecommendedCarousel(RecommendedEventsClient.fetchAll()),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
