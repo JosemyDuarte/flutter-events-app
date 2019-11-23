@@ -14,27 +14,59 @@ class RecommendedCarousel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         TitleText("Recommended"),
-        Expanded(
-          child: ListView.builder(
-            physics: ClampingScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: 15,
-            itemBuilder: (BuildContext context, int index) => Card(
-              child: Center(child: _buildCarouselItem(context, index)),
-            ),
-          ),
-        )
+        Carousel(),
       ],
     );
   }
+}
 
-  Widget _buildCarouselItem(BuildContext context, int itemIndex) {
+class Carousel extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 15,
+        itemBuilder: (BuildContext context, int index) => Card(
+          elevation: 0,
+          child: Center(child: CarouselItem()),
+        ),
+      ),
+    );
+  }
+}
+
+class CarouselItem extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      width: 140,
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(8.0),
+      padding: EdgeInsets.all(2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.34,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                image: DecorationImage(
+                  image: ExactAssetImage("assets/images/sonic.png"),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+          ),
+          Text("Sonic"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[Icon(Icons.star), Text("94%")],
+          )
+        ],
       ),
     );
   }

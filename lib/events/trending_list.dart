@@ -33,7 +33,6 @@ class HorizontalEventCard extends StatelessWidget {
       child: Container(
         height: _cardHeight,
         decoration: BoxDecoration(
-          color: Colors.grey,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
@@ -54,7 +53,11 @@ class MoviePoster extends StatelessWidget {
       constraints: BoxConstraints.expand(
           width: MediaQuery.of(context).size.width * 0.33),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.grey,
+        image: DecorationImage(
+          image: ExactAssetImage("assets/images/ironman.png"),
+          fit: BoxFit.cover,
+        ),
         borderRadius: BorderRadius.circular(8.0),
       ),
     );

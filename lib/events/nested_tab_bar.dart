@@ -57,7 +57,7 @@ class _NestedTabBarState extends State<NestedTabBar>
           ],
         ),
         SizedBox(
-          height: screenHeight * 0.30,
+          height: screenHeight * 0.34,
           child: TabBarView(
             controller: _nestedTabController,
             children: <Widget>[
