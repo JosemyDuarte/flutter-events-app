@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:luxury_bag_collection/model/recommended_event.dart';
+import 'package:luxury_bag_collection/model/trending_event.dart';
 
 import 'recommended_carousel.dart';
+import 'trending_list.dart';
 
-class NestedTabBar extends StatefulWidget {
+class CategoriesTabBar extends StatefulWidget {
   @override
-  _NestedTabBarState createState() => _NestedTabBarState();
+  _CategoriesTabBarState createState() => _CategoriesTabBarState();
 }
 
-class _NestedTabBarState extends State<NestedTabBar>
+class _CategoriesTabBarState extends State<CategoriesTabBar>
     with TickerProviderStateMixin {
   TabController _nestedTabController;
 
@@ -90,6 +92,7 @@ class _NestedTabBarState extends State<NestedTabBar>
             ],
           ),
         ),
+        TrendingList(TrendingEventsClient.fetchAll())
       ],
     );
   }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:luxury_bag_collection/model/trending_event.dart';
 
 import 'title_text.dart';
 
 class TrendingList extends StatelessWidget {
-  final double _height;
+  final List<TrendingEventModel> _trendingEvents;
 
-  TrendingList(this._height);
+  TrendingList(this._trendingEvents);
 
   @override
   Widget build(BuildContext context) {
@@ -13,32 +14,29 @@ class TrendingList extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         TitleText("Trending"),
-        HorizontalEventCard(_height),
-        HorizontalEventCard(_height),
-        HorizontalEventCard(_height),
-      ],
+      ]..addAll(_trendingEvents.map((event) => HorizontalEventCard(event))),
     );
   }
 }
 
 class HorizontalEventCard extends StatelessWidget {
-  final double _cardHeight;
+  final TrendingEventModel _trendingEvent;
 
-  HorizontalEventCard(this._cardHeight);
+  HorizontalEventCard(this._trendingEvent);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom: 20.0),
       child: Container(
-        height: _cardHeight,
+        height: MediaQuery.of(context).size.height * 0.18,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
           children: <Widget>[
-            MoviePoster(),
-            MovieDescription(),
+            MoviePoster(_trendingEvent.imagePath),
+            MovieData(_trendingEvent),
           ],
         ),
       ),
@@ -47,6 +45,10 @@ class HorizontalEventCard extends StatelessWidget {
 }
 
 class MoviePoster extends StatelessWidget {
+  final String _imagePath;
+
+  MoviePoster(this._imagePath);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,7 +57,7 @@ class MoviePoster extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey,
         image: DecorationImage(
-          image: ExactAssetImage("assets/images/ironman.png"),
+          image: ExactAssetImage(_imagePath),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(8.0),
@@ -64,7 +66,11 @@ class MoviePoster extends StatelessWidget {
   }
 }
 
-class MovieDescription extends StatelessWidget {
+class MovieData extends StatelessWidget {
+  final TrendingEventModel _trendingEvent;
+
+  MovieData(this._trendingEvent);
+
   @override
   Widget build(BuildContext context) {
     return Flexible(
@@ -76,12 +82,12 @@ class MovieDescription extends StatelessWidget {
           children: <Widget>[
             Center(
                 child: Text(
-              "IRON MAN",
+              _trendingEvent.title,
               style: Theme.of(context).textTheme.title,
             )),
             Container(
               child: Text(
-                "Iron Man is a 2008 American superhero film based on the Marvel Comics character of the same name.",
+                _trendingEvent.description,
                 style: Theme.of(context).textTheme.body1.copyWith(fontSize: 15),
                 maxLines: 3,
                 textAlign: TextAlign.left,
@@ -92,11 +98,13 @@ class MovieDescription extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Icon(Icons.star),
-                Text("94%"),
+                Text('${_trendingEvent.nFavorites}%'),
                 Icon(Icons.remove_red_eye),
-                Text("12K"),
+                Text(
+                    '${_trendingEvent.nViews / 1000}K'), //TODO format number before display
                 Icon(Icons.message),
-                Text("8K"),
+                Text(
+                    '${_trendingEvent.nMessages / 1000}K'), //TODO format number before display
               ],
             ),
           ],

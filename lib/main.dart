@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/events/nested_tab_bar.dart';
-
-import 'events/trending_list.dart';
+import 'package:luxury_bag_collection/events/categories_tab_bar.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,18 +29,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: SafeArea(
@@ -54,11 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                _buildTopText(),
-                _searchBar(),
-                NestedTabBar(),
-                TrendingList(screenHeight * 0.18)
-                //TrendingList(),
+                TopText("What event are you looking for you?"),
+                SearchBar(),
+                CategoriesTabBar(),
               ],
             ),
           ),
@@ -66,15 +53,25 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
 
-  Widget _buildTopText() {
+class TopText extends StatelessWidget {
+  final String _text;
+
+  const TopText(
+    this._text, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.only(left: 5, top: 15, bottom: 20),
         child: Container(
           child: Text(
-            "What event are you looking for you?",
+            _text,
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.left,
             style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.w600),
@@ -83,8 +80,15 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
 
-  Widget _searchBar() {
+class SearchBar extends StatelessWidget {
+  const SearchBar({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.white60,
       child: Row(
