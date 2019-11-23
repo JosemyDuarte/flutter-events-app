@@ -60,7 +60,7 @@ class _CategoriesTabBarState extends State<CategoriesTabBar>
           ],
         ),
         SizedBox(
-          height: screenHeight * 0.34,
+          height: screenHeight * 0.38,
           child: TabBarView(
             controller: _nestedTabController,
             children: <Widget>[

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:luxury_bag_collection/model/trending_event.dart';
 
+import 'stats_icon.dart';
 import 'title_text.dart';
 
 class TrendingList extends StatelessWidget {
@@ -97,14 +98,32 @@ class MovieData extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Icon(Icons.star),
-                Text('${_trendingEvent.nFavorites}%'),
-                Icon(Icons.remove_red_eye),
-                Text(
-                    '${_trendingEvent.nViews / 1000}K'), //TODO format number before display
-                Icon(Icons.message),
-                Text(
-                    '${_trendingEvent.nMessages / 1000}K'), //TODO format number before display
+                StatsIcon(
+                  icon: Icons.star,
+                  iconSize: 15,
+                  iconColor: Colors.red,
+                  backgroundColor: Colors.pink[100],
+                  stats: _trendingEvent.percentageFavorites,
+                  suffix: "%",
+                ),
+                StatsIcon(
+                  icon: Icons.remove_red_eye,
+                  iconSize: 15,
+                  iconColor: Colors.purple,
+                  backgroundColor: Colors.purple[100],
+                  stats: _trendingEvent.nViews ~/
+                      1000, //TODO format number before display
+                  suffix: "K",
+                ),
+                StatsIcon(
+                  icon: Icons.message,
+                  iconSize: 15,
+                  iconColor: Colors.yellow,
+                  backgroundColor: Colors.yellow[100],
+                  stats: _trendingEvent.nMessages ~/
+                      1000, //TODO format number before display
+                  suffix: "K",
+                ),
               ],
             ),
           ],
