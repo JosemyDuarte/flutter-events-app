@@ -37,9 +37,10 @@ class _CategoriesTabBarState extends State<CategoriesTabBar>
       children: <Widget>[
         TabBar(
           controller: _nestedTabController,
-          indicatorColor: Colors.teal,
-          labelColor: Colors.teal,
-          unselectedLabelColor: Colors.black54,
+          indicatorWeight: 4,
+          indicatorColor: Colors.blue,
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey,
           isScrollable: true,
           tabs: <Widget>[
             Tab(

@@ -79,13 +79,12 @@ class MovieData extends StatelessWidget {
         padding: const EdgeInsets.only(left: 8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center(
-                child: Text(
+            Text(
               _trendingEvent.title,
               style: Theme.of(context).textTheme.title,
-            )),
+            ),
             Container(
               child: Text(
                 _trendingEvent.description,
@@ -95,8 +94,8 @@ class MovieData extends StatelessWidget {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 StatsIcon(
                   icon: Icons.star,
