@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:luxury_bag_collection/events/trending_list.dart';
 import 'package:luxury_bag_collection/model/recommended_event.dart';
 import 'package:luxury_bag_collection/model/trending_event.dart';
 
 import 'recommended_carousel.dart';
-import 'trending_list.dart';
 
 class CategoriesTabBar extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class _CategoriesTabBarState extends State<CategoriesTabBar>
   void initState() {
     super.initState();
 
-    _nestedTabController = new TabController(length: 5, vsync: this);
+    _nestedTabController = new TabController(length: 7, vsync: this);
   }
 
   @override
@@ -37,64 +37,91 @@ class _CategoriesTabBarState extends State<CategoriesTabBar>
       children: <Widget>[
         TabBar(
           controller: _nestedTabController,
-          indicatorWeight: 4,
+          labelPadding: EdgeInsets.only(right: 9, left: 9),
+          indicatorWeight: 5,
           indicatorColor: Colors.blue,
           labelColor: Colors.black,
           unselectedLabelColor: Colors.grey,
           isScrollable: true,
-          tabs: <Widget>[
-            Tab(
-              text: "All",
-            ),
-            Tab(
-              text: "Movies",
-            ),
-            Tab(
-              text: "Events",
-            ),
-            Tab(
-              text: "Plays",
-            ),
-            Tab(
-              text: "Sports",
-            ),
-          ],
+          tabs: getTabs(),
         ),
         SizedBox(
           height: screenHeight * 0.38,
           child: TabBarView(
             controller: _nestedTabController,
-            children: <Widget>[
-              RecommendedCarousel(RecommendedEventsClient.fetchAll()),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.orangeAccent,
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.greenAccent,
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.indigoAccent,
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.redAccent,
-                ),
-              ),
-            ],
+            children: getTabsViews(),
           ),
         ),
         TrendingList(TrendingEventsClient.fetchAll())
       ],
     );
   }
+}
+
+List<Widget> getTabs() {
+  return [
+    Tab(
+      text: "All",
+    ),
+    Tab(
+      text: "Movies",
+    ),
+    Tab(
+      text: "Events",
+    ),
+    Tab(
+      text: "Plays",
+    ),
+    Tab(
+      text: "Sports",
+    ),
+    Tab(
+      text: "Activities",
+    ),
+    Tab(
+      text: "Monuments",
+    )
+  ];
+}
+
+List<Widget> getTabsViews() {
+  return [
+    RecommendedCarousel(RecommendedEventsClient.fetchAll()),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.orangeAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.greenAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.indigoAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.redAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.blueAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.amberAccent,
+      ),
+    ),
+  ];
 }

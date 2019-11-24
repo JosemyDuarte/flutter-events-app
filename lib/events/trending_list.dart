@@ -12,7 +12,6 @@ class TrendingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         TitleText("Trending"),
       ]..addAll(_trendingEvents.map((event) => HorizontalEventCard(event))),

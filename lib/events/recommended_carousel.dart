@@ -11,15 +11,18 @@ class RecommendedCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: _buildCarousel());
+    return _buildCarousel();
   }
 
   Widget _buildCarousel() {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         TitleText("Recommended"),
         Carousel(_recommendedEvents),
+        //TrendingList(TrendingEventsClient.fetchAll()),
       ],
     );
   }

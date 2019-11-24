@@ -90,7 +90,7 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white60,
+      color: Colors.grey[50],
       child: Row(
         children: <Widget>[
           IconButton(
@@ -110,7 +110,6 @@ class SearchBar extends StatelessWidget {
             ),
           ),
           IconButton(
-            splashColor: Colors.grey,
             icon: Icon(Icons.menu),
             onPressed: () {},
           ),
