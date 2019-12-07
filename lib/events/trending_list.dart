@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:luxury_bag_collection/model/trending_event.dart';
 
 import 'stats_icon.dart';
-import 'title_text.dart';
 
 class TrendingList extends StatelessWidget {
   final List<TrendingEventModel> _trendingEvents;
@@ -12,9 +11,8 @@ class TrendingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        TitleText("Trending"),
-      ]..addAll(_trendingEvents.map((event) => HorizontalEventCard(event))),
+      children:
+      _trendingEvents.map((event) => HorizontalEventCard(event)).toList(),
     );
   }
 }
@@ -109,8 +107,8 @@ class MovieData extends StatelessWidget {
                   iconSize: 15,
                   iconColor: Colors.purple,
                   backgroundColor: Colors.purple[100],
-                  stats: _trendingEvent.nViews ~/
-                      1000, //TODO format number before display
+                  stats: _trendingEvent.nViews ~/ 1000,
+                  //TODO format number before display
                   suffix: "K",
                 ),
                 StatsIcon(
@@ -118,8 +116,8 @@ class MovieData extends StatelessWidget {
                   iconSize: 15,
                   iconColor: Colors.yellow,
                   backgroundColor: Colors.yellow[100],
-                  stats: _trendingEvent.nMessages ~/
-                      1000, //TODO format number before display
+                  stats: _trendingEvent.nMessages ~/ 1000,
+                  //TODO format number before display
                   suffix: "K",
                 ),
               ],

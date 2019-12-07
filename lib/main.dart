@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'events/recommended_carousel.dart';
-import 'model/recommended_event.dart';
+import 'package:luxury_bag_collection/events/categories_tabs.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,19 +27,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  TabController _nestedTabController;
+  CategoriesTab _categoriesTabs;
 
   @override
   void initState() {
     super.initState();
-
-    _nestedTabController = new TabController(length: 7, vsync: this);
+    _categoriesTabs = CategoriesTab(vsync: this);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _nestedTabController.dispose();
+    _categoriesTabs.dispose();
   }
 
   @override
@@ -62,168 +59,25 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          TopText("What event are you looking for you?"),
-                          SearchBar(),
+                          _TopText("What event are you looking for you?"),
+                          _SearchBar(),
                         ])),
                 expandedHeight: 150.0,
-                bottom: TabBar(
-                  controller: _nestedTabController,
-                  labelPadding: EdgeInsets.only(right: 9, left: 9),
-                  indicatorWeight: 5,
-                  indicatorColor: Colors.blue,
-                  labelColor: Colors.black,
-                  unselectedLabelColor: Colors.grey,
-                  isScrollable: true,
-                  tabs: getTabs(),
-                ),
+                bottom: _categoriesTabs.categoriesTabBar(),
               ),
             ];
           },
-          body: TabBarView(
-            controller: _nestedTabController,
-            children: getTabsViews(),
-          ),
+          body: _categoriesTabs.categoriesTabBarView(),
         ),
       ),
     );
   }
 }
 
-class PageTwo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 300,
-      child: ListView.builder(
-        physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemExtent: 250.0,
-        itemBuilder: (context, index) => Container(
-          padding: EdgeInsets.all(10.0),
-          child: Material(
-            elevation: 4.0,
-            borderRadius: BorderRadius.circular(5.0),
-            color: index % 2 == 0 ? Colors.cyan : Colors.deepOrange,
-            child: Center(
-              child: Text(index.toString()),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-List<Widget> getTabs() {
-  return [
-    Tab(
-      text: "All",
-    ),
-    Tab(
-      text: "Movies",
-    ),
-    Tab(
-      text: "Events",
-    ),
-    Tab(
-      text: "Plays",
-    ),
-    Tab(
-      text: "Sports",
-    ),
-    Tab(
-      text: "Activities",
-    ),
-    Tab(
-      text: "Monuments",
-    )
-  ];
-}
-
-List<Widget> getTabsViews() {
-  return [
-    RecommendedCarousel(RecommendedEventsClient.fetchAll()),
-    Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: Colors.orangeAccent,
-      ),
-    ),
-    Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: Colors.greenAccent,
-      ),
-    ),
-    Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: Colors.indigoAccent,
-      ),
-    ),
-    Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: Colors.redAccent,
-      ),
-    ),
-    Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: Colors.blueAccent,
-      ),
-    ),
-    Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: Colors.amberAccent,
-      ),
-    ),
-  ];
-}
-//List<Widget> getTabsViews() {
-//  return [
-//    PageOne(),
-//    PageTwo(),
-//    PageTwo(),
-//    PageTwo(),
-//    PageTwo(),
-//    PageTwo(),
-//    PageTwo(),
-//  ];
-//}
-//
-//List<Widget> getTabs() {
-//  return [
-//    Tab(
-//      text: "All",
-//    ),
-//    Tab(
-//      text: "Movies",
-//    ),
-//    Tab(
-//      text: "Events",
-//    ),
-//    Tab(
-//      text: "Plays",
-//    ),
-//    Tab(
-//      text: "Sports",
-//    ),
-//    Tab(
-//      text: "Activities",
-//    ),
-//    Tab(
-//      text: "Monuments",
-//    )
-//  ];
-//}
-
-class TopText extends StatelessWidget {
+class _TopText extends StatelessWidget {
   final String _text;
 
-  const TopText(
+  const _TopText(
     this._text, {
     Key key,
   }) : super(key: key);
@@ -247,8 +101,8 @@ class TopText extends StatelessWidget {
   }
 }
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({
+class _SearchBar extends StatelessWidget {
+  const _SearchBar({
     Key key,
   }) : super(key: key);
 

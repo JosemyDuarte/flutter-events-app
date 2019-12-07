@@ -6,10 +6,10 @@ import 'package:luxury_bag_collection/model/trending_event.dart';
 import 'stats_icon.dart';
 import 'title_text.dart';
 
-class RecommendedCarousel extends StatelessWidget {
+class Events extends StatelessWidget {
   final List<RecommendedEventModel> _recommendedEvents;
 
-  RecommendedCarousel(this._recommendedEvents);
+  Events(this._recommendedEvents);
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +21,43 @@ class RecommendedCarousel extends StatelessWidget {
           shrinkWrap: true,
           children: <Widget>[
             TitleText("Recommended"),
-            Container(
-              height: screenHeight * 0.40,
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: _recommendedEvents.length,
-                itemBuilder: (BuildContext context, int index) => Card(
-                  elevation: 0,
-                  child: CarouselItem(_recommendedEvents[index]),
-                ),
-              ),
-            ),
-            TrendingList(TrendingEventsClient.fetchAll())
+            Carousel(
+                screenHeight: screenHeight,
+                recommendedEvents: _recommendedEvents),
+            TitleText("Trending"),
+            TrendingList(TrendingEventsClient.fetchAll()),
           ]),
+    );
+  }
+}
+
+class Carousel extends StatelessWidget {
+  const Carousel({
+    Key key,
+    @required this.screenHeight,
+    @required List<RecommendedEventModel> recommendedEvents,
+  })
+      : _recommendedEvents = recommendedEvents,
+        super(key: key);
+
+  final double screenHeight;
+  final List<RecommendedEventModel> _recommendedEvents;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: screenHeight * 0.40,
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: _recommendedEvents.length,
+        itemBuilder: (BuildContext context, int index) =>
+            Card(
+              elevation: 0,
+              child: CarouselItem(_recommendedEvents[index]),
+            ),
+      ),
     );
   }
 }
