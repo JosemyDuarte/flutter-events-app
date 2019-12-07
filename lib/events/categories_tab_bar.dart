@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/events/trending_list.dart';
 import 'package:luxury_bag_collection/model/recommended_event.dart';
-import 'package:luxury_bag_collection/model/trending_event.dart';
 
 import 'recommended_carousel.dart';
 
@@ -45,14 +43,10 @@ class _CategoriesTabBarState extends State<CategoriesTabBar>
           isScrollable: true,
           tabs: getTabs(),
         ),
-        SizedBox(
-          height: screenHeight * 0.38,
-          child: TabBarView(
-            controller: _nestedTabController,
-            children: getTabsViews(),
-          ),
+        TabBarView(
+          controller: _nestedTabController,
+          children: getTabsViews(),
         ),
-        TrendingList(TrendingEventsClient.fetchAll())
       ],
     );
   }

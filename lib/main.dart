@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/events/categories_tab_bar.dart';
+import 'package:luxury_bag_collection/events/example2.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,33 +26,129 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  TabController _nestedTabController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _nestedTabController = new TabController(length: 7, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _nestedTabController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(widget.title),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                pinned: false,
+                backgroundColor: Colors.white,
+                flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.pin,
+                    background: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          TopText("What event are you looking for you?"),
+                          SearchBar(),
+                        ])),
+                expandedHeight: 150.0,
+                bottom: TabBar(
+                  controller: _nestedTabController,
+                  labelPadding: EdgeInsets.only(right: 9, left: 9),
+                  indicatorWeight: 5,
+                  indicatorColor: Colors.blue,
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Colors.grey,
+                  isScrollable: true,
+                  tabs: getTabs(),
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            controller: _nestedTabController,
+            children: getTabsViews(),
+          ),
+        ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TopText("What event are you looking for you?"),
-                SearchBar(),
-                CategoriesTabBar(),
-              ],
+    );
+  }
+}
+
+class PageTwo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 300,
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemExtent: 250.0,
+        itemBuilder: (context, index) => Container(
+          padding: EdgeInsets.all(10.0),
+          child: Material(
+            elevation: 4.0,
+            borderRadius: BorderRadius.circular(5.0),
+            color: index % 2 == 0 ? Colors.cyan : Colors.deepOrange,
+            child: Center(
+              child: Text(index.toString()),
             ),
           ),
         ),
       ),
     );
   }
+}
+
+List<Widget> getTabsViews() {
+  return [
+    PageOne(),
+    PageTwo(),
+    PageTwo(),
+    PageTwo(),
+    PageTwo(),
+    PageTwo(),
+    PageTwo(),
+  ];
+}
+
+List<Widget> getTabs() {
+  return [
+    Tab(
+      text: "All",
+    ),
+    Tab(
+      text: "Movies",
+    ),
+    Tab(
+      text: "Events",
+    ),
+    Tab(
+      text: "Plays",
+    ),
+    Tab(
+      text: "Sports",
+    ),
+    Tab(
+      text: "Activities",
+    ),
+    Tab(
+      text: "Monuments",
+    )
+  ];
 }
 
 class TopText extends StatelessWidget {
