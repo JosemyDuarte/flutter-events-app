@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:luxury_bag_collection/events/trending_list.dart';
 import 'package:luxury_bag_collection/model/recommended_event.dart';
+import 'package:luxury_bag_collection/model/trending_event.dart';
 
 import 'stats_icon.dart';
 import 'title_text.dart';
@@ -11,41 +13,29 @@ class RecommendedCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildCarousel();
-  }
+    double screenHeight = MediaQuery.of(context).size.height;
 
-  Widget _buildCarousel() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        TitleText("Recommended"),
-        Carousel(_recommendedEvents),
-        //TrendingList(TrendingEventsClient.fetchAll()),
-      ],
-    );
-  }
-}
-
-class Carousel extends StatelessWidget {
-  final List<RecommendedEventModel> _recommendedEvents;
-
-  Carousel(this._recommendedEvents);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: _recommendedEvents.length,
-        itemBuilder: (BuildContext context, int index) => Card(
-          elevation: 0,
-          child: CarouselItem(_recommendedEvents[index]),
-        ),
-      ),
+    return Container(
+      child: ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          children: <Widget>[
+            TitleText("Recommended"),
+            Container(
+              height: screenHeight * 0.40,
+              child: ListView.builder(
+                physics: ClampingScrollPhysics(),
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: _recommendedEvents.length,
+                itemBuilder: (BuildContext context, int index) => Card(
+                  elevation: 0,
+                  child: CarouselItem(_recommendedEvents[index]),
+                ),
+              ),
+            ),
+            TrendingList(TrendingEventsClient.fetchAll())
+          ]),
     );
   }
 }

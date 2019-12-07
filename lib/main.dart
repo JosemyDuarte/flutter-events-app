@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/events/example2.dart';
+
+import 'events/recommended_carousel.dart';
+import 'model/recommended_event.dart';
 
 void main() => runApp(MyApp());
 
@@ -113,18 +115,6 @@ class PageTwo extends StatelessWidget {
   }
 }
 
-List<Widget> getTabsViews() {
-  return [
-    PageOne(),
-    PageTwo(),
-    PageTwo(),
-    PageTwo(),
-    PageTwo(),
-    PageTwo(),
-    PageTwo(),
-  ];
-}
-
 List<Widget> getTabs() {
   return [
     Tab(
@@ -150,6 +140,85 @@ List<Widget> getTabs() {
     )
   ];
 }
+
+List<Widget> getTabsViews() {
+  return [
+    RecommendedCarousel(RecommendedEventsClient.fetchAll()),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.orangeAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.greenAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.indigoAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.redAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.blueAccent,
+      ),
+    ),
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.amberAccent,
+      ),
+    ),
+  ];
+}
+//List<Widget> getTabsViews() {
+//  return [
+//    PageOne(),
+//    PageTwo(),
+//    PageTwo(),
+//    PageTwo(),
+//    PageTwo(),
+//    PageTwo(),
+//    PageTwo(),
+//  ];
+//}
+//
+//List<Widget> getTabs() {
+//  return [
+//    Tab(
+//      text: "All",
+//    ),
+//    Tab(
+//      text: "Movies",
+//    ),
+//    Tab(
+//      text: "Events",
+//    ),
+//    Tab(
+//      text: "Plays",
+//    ),
+//    Tab(
+//      text: "Sports",
+//    ),
+//    Tab(
+//      text: "Activities",
+//    ),
+//    Tab(
+//      text: "Monuments",
+//    )
+//  ];
+//}
 
 class TopText extends StatelessWidget {
   final String _text;
