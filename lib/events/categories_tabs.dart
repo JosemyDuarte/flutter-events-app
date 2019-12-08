@@ -1,6 +1,6 @@
+import 'package:events_jd/events/events.dart';
+import 'package:events_jd/model/recommended_event.dart';
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/events/events.dart';
-import 'package:luxury_bag_collection/model/recommended_event.dart';
 
 class CategoriesTab {
   TabController _nestedTabController;

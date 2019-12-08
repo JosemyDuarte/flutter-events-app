@@ -1,5 +1,5 @@
+import 'package:events_jd/model/trending_event.dart';
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/model/trending_event.dart';
 
 import 'stats_icon.dart';
 
@@ -12,7 +12,7 @@ class TrendingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children:
-      _trendingEvents.map((event) => HorizontalEventCard(event)).toList(),
+          _trendingEvents.map((event) => HorizontalEventCard(event)).toList(),
     );
   }
 }

@@ -1,7 +1,7 @@
+import 'package:events_jd/events/trending_list.dart';
+import 'package:events_jd/model/recommended_event.dart';
+import 'package:events_jd/model/trending_event.dart';
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/events/trending_list.dart';
-import 'package:luxury_bag_collection/model/recommended_event.dart';
-import 'package:luxury_bag_collection/model/trending_event.dart';
 
 import 'stats_icon.dart';
 import 'title_text.dart';
@@ -36,8 +36,7 @@ class Carousel extends StatelessWidget {
     Key key,
     @required this.screenHeight,
     @required List<RecommendedEventModel> recommendedEvents,
-  })
-      : _recommendedEvents = recommendedEvents,
+  })  : _recommendedEvents = recommendedEvents,
         super(key: key);
 
   final double screenHeight;
@@ -52,11 +51,10 @@ class Carousel extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: _recommendedEvents.length,
-        itemBuilder: (BuildContext context, int index) =>
-            Card(
-              elevation: 0,
-              child: CarouselItem(_recommendedEvents[index]),
-            ),
+        itemBuilder: (BuildContext context, int index) => Card(
+          elevation: 0,
+          child: CarouselItem(_recommendedEvents[index]),
+        ),
       ),
     );
   }

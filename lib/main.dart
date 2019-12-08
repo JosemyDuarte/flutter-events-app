@@ -1,5 +1,5 @@
+import 'package:events_jd/events/categories_tabs.dart';
 import 'package:flutter/material.dart';
-import 'package:luxury_bag_collection/events/categories_tabs.dart';
 
 void main() => runApp(MyApp());
 
