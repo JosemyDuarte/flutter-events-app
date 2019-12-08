@@ -10,4 +10,8 @@ All the code present in this repository is probably not pretty, but compile 😅
 
 |                   Design                    |                 Actual App                  |
 |                  ---------                  |                  ---------                  |
-|![Events App Design](./EventsAppDesign.png) | ![Events App Mobile](./EventsAppMobile.png) |
+| ![Events App Design](./EventsAppDesign.png) | ![Events App Mobile](./EventsAppMobile.png) |
+
+## Credits 
+
+[Design by Dinu Dinesh](https://www.uplabs.com/posts/detail-screen-dark-light-mode)
