@@ -13,6 +13,10 @@ class RecommendedEventsClient {
           "Spider man - 4", "assets/images/spiderman.png", 94),
       RecommendedEventModel("Sonic", "assets/images/sonic.png", 89),
       RecommendedEventModel("Angry Birds", "assets/images/angrebird.png", 44),
+      RecommendedEventModel(
+          "Spider man - 4", "assets/images/spiderman.png", 94),
+      RecommendedEventModel("Sonic", "assets/images/sonic.png", 89),
+      RecommendedEventModel("Angry Birds", "assets/images/angrebird.png", 44),
     ];
   }
 }
