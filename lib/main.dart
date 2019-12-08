@@ -43,31 +43,36 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                pinned: false,
-                backgroundColor: Colors.white,
-                flexibleSpace: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.pin,
-                    background: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          _TopText("What event are you looking for you?"),
-                          _SearchBar(),
-                        ])),
-                expandedHeight: 150.0,
-                bottom: _categoriesTabs.categoriesTabBar(),
-              ),
-            ];
-          },
-          body: _categoriesTabs.categoriesTabBarView(),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Align(
+        alignment: Alignment.topLeft,
+        child: SafeArea(
+          minimum: const EdgeInsets.only(left: 4, right: 4),
+          child: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  pinned: false,
+                  backgroundColor: Colors.white,
+                  flexibleSpace: FlexibleSpaceBar(
+                      collapseMode: CollapseMode.pin,
+                      background: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            _TopText("What event are you looking for you?"),
+                            _SearchBar(),
+                          ])),
+                  expandedHeight: 150.0,
+                  bottom: _categoriesTabs.categoriesTabBar(),
+                ),
+              ];
+            },
+            body: _categoriesTabs.categoriesTabBarView(),
+          ),
         ),
       ),
     );
